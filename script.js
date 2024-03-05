@@ -95,6 +95,15 @@ button1.onclick = goStore;
 button2.onclick = goCave;
 button3.onclick = fightDragon;
 
+
+// 定义一个函数来切换背景图片
+function changeBackground(imageUrl) {
+  const background = document.getElementById("background-image");
+  background.style.backgroundImage = `url(${imageUrl})`;
+}
+
+
+
 function update(location) {
   monsterStats.style.display = "none";
   button1.innerText = location["button text"][0];
@@ -108,14 +117,18 @@ function update(location) {
 
 function goTown() {
   update(locations[0]);
+  changeBackground("Towns.png");
 }
 
 function goStore() {
   update(locations[1]);
+  changeBackground("shop.png");
 }
+
 
 function goCave() {
   update(locations[2]);
+  changeBackground("Cave.png");
 }
 
 function buyHealth() {
@@ -163,17 +176,20 @@ function sellWeapon() {
 
 
 function fightSlime() {
+  changeBackground("Slimes.png");
   fighting = 0;
   goFight();
 }
 
 function fightBeast() {
+  changeBackground("beasts.png");
   fighting = 1;
   goFight();
 }
 
 function fightDragon() {
   fighting = 2;
+  changeBackground("Dragon.png");
   goFight();
 }
 
@@ -283,3 +299,4 @@ function pick(guess) {
     }
   }
 }
+
