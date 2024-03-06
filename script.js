@@ -101,7 +101,10 @@ function changeBackground(imageUrl) {
   const background = document.getElementById("background-image");
   background.style.backgroundImage = `url(${imageUrl})`;
 }
-
+//定义一个函数来添加icon
+function addIconToButton(button, iconClassName) {
+  button.innerHTML = `<i class="${iconClassName}"></i> ${button.innerText}`;
+}
 
 
 function update(location) {
@@ -117,18 +120,22 @@ function update(location) {
 
 function goTown() {
   update(locations[0]);
-  changeBackground("Towns.png");
+  changeBackground("image/Towns.png");
+  addIconToButton(button1, "bi bi-shop");
+  addIconToButton(button2, "bi bi-house-door");
+  addIconToButton(button3, "bi bi-shield-lock");
 }
 
 function goStore() {
   update(locations[1]);
-  changeBackground("shop.png");
+  changeBackground("image/shop.png");
+  
 }
 
 
 function goCave() {
   update(locations[2]);
-  changeBackground("Cave.png");
+  changeBackground("image/Cave.png");
 }
 
 function buyHealth() {
@@ -176,20 +183,20 @@ function sellWeapon() {
 
 
 function fightSlime() {
-  changeBackground("Slimes.png");
+  changeBackground("image/Slimes.png");
   fighting = 0;
   goFight();
 }
 
 function fightBeast() {
-  changeBackground("beasts.png");
+  changeBackground("image/beasts.png");
   fighting = 1;
   goFight();
 }
 
 function fightDragon() {
   fighting = 2;
-  changeBackground("Dragon.png");
+  changeBackground("image/Dragon.png");
   goFight();
 }
 
