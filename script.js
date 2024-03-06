@@ -105,6 +105,11 @@ function changeBackground(imageUrl) {
 function addIconToButton(button, iconClassName) {
   button.innerHTML = `<i class="${iconClassName}"></i> ${button.innerText}`;
 }
+// 定义一个函数来添加icon
+function addpngToButton(button, src) {
+  button.innerHTML = `<img src="${src}" alt="icon" /> ${button.innerText}`;
+}
+
 
 
 function update(location) {
@@ -121,21 +126,25 @@ function update(location) {
 function goTown() {
   update(locations[0]);
   changeBackground("image/Towns.png");
-  addIconToButton(button1, "bi bi-shop");
-  addIconToButton(button2, "bi bi-house-door");
-  addIconToButton(button3, "bi bi-shield-lock");
+  addpngToButton(button1, "image/shop1.png");
+  addpngToButton(button2, "image/go.png");
+  addpngToButton(button3, "image/dragon1.png");
 }
 
 function goStore() {
   update(locations[1]);
   changeBackground("image/shop.png");
-  
+  addpngToButton(button1, "image/life.png");
+  addpngToButton(button2, "image/weapon.png");
+  addpngToButton(button3, "image/amsterdam.png");
 }
-
-
 function goCave() {
   update(locations[2]);
   changeBackground("image/Cave.png");
+  addpngToButton(button1, "image/slime_fill.png");
+  addpngToButton(button2, "image/野兽.png");
+  addpngToButton(button3, "image/amsterdam.png");
+ 
 }
 
 function buyHealth() {
@@ -186,18 +195,27 @@ function fightSlime() {
   changeBackground("image/Slimes.png");
   fighting = 0;
   goFight();
+  addpngToButton(button1, "image/attack.png");
+  addpngToButton(button2, "image/de.png");
+  addpngToButton(button3, "image/run.png");
 }
 
 function fightBeast() {
   changeBackground("image/beasts.png");
   fighting = 1;
   goFight();
+  addpngToButton(button1, "image/attack.png");
+  addpngToButton(button2, "image/de.png");
+  addpngToButton(button3, "image/run.png");
 }
 
 function fightDragon() {
   fighting = 2;
   changeBackground("image/Dragon.png");
   goFight();
+  addpngToButton(button1, "image/attack.png");
+  addpngToButton(button2, "image/de.png");
+  addpngToButton(button3, "image/run.png");
 }
 
 function goFight() {

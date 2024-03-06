@@ -43,3 +43,22 @@ button {
   background-image: linear-gradient(#fecc4c, #ffac33);
   border: 3px solid #feac32;
 }
+
+.bi-heart,#healthText,#health1 {  
+  color: red;  
+}  
+.bi-shop{
+    color: rgb(70, 117, 34);
+}
+.bi-house-door{
+    color: rgb(208, 113, 19);
+}
+.bi-shield-lock{
+    color:rgb(132, 27, 27);
+}
+.bi-chevron-double-up,#xpText,#xp1{
+    color: blue;
+}
+.bi-coin,#goldText,#gold1{
+    color: gold;
+}
