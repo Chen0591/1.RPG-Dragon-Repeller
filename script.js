@@ -227,13 +227,13 @@ function goFight() {
 }
 
 function attack() {
-  text.innerText = "The " + monsters[fighting].name + " attacks.";
-  text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
+  text.innerText = "这只 " + monsters[fighting].name + " 在攻击.";
+  text.innerText += " 你利用 " + weapons[currentWeapon].name + "在战斗.";
   health -= getMonsterAttackValue(monsters[fighting].level);
   if (isMonsterHit()) {
     monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;    
   } else {
-    text.innerText += " You miss.";
+    text.innerText += " 没有命中.";
   }
   healthText.innerText = health;
   monsterHealthText.innerText = monsterHealth;
@@ -243,7 +243,7 @@ function attack() {
     fighting === 2 ? winGame() : defeatMonster();
   }
   if (Math.random() <= .1 && inventory.length !== 1) {
-    text.innerText += " Your " + inventory.pop() + " breaks.";
+    text.innerText += " 你的 " + inventory.pop() + " 毁坏了。";
     currentWeapon--;
   }
 }
@@ -259,7 +259,7 @@ function isMonsterHit() {
 }
 
 function dodge() {
-  text.innerText = "You dodge the attack from the " + monsters[fighting].name;
+  text.innerText = "你躲避了来自 " + monsters[fighting].name+"的攻击。";
 }
 
 function defeatMonster() {
@@ -307,16 +307,16 @@ function pick(guess) {
   while (numbers.length < 10) {
     numbers.push(Math.floor(Math.random() * 11));
   }
-  text.innerText = "You picked " + guess + ". Here are the random numbers:\n";
+  text.innerText = "你选择了 " + guess + "。 正确的幸运数字是:\n";
   for (let i = 0; i < 10; i++) {
     text.innerText += numbers[i] + "\n";
   }
   if (numbers.indexOf(guess) !== -1) {
-    text.innerText += "Right! You win 20 gold!";
+    text.innerText += "对了! 你赢得了 20 金币!";
     gold += 20;
     goldText.innerText = gold;
   } else {
-    text.innerText += "Wrong! You lose 10 health!";
+    text.innerText += "遗憾! 你损失了 10 生命值!";
     health -= 10;
     healthText.innerText = health;
     if (health <= 0) {
