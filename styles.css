@@ -62,3 +62,13 @@ button {
 .bi-coin,#goldText,#gold1{
     color: gold;
 }
+/*动画效果*/
+.animation {
+  position: absolute;
+  animation: yourAnimationName 1s forwards;  /* 替换yourAnimationName为你的动画名称 */
+}
+
+@keyframes yourAnimationName {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<button id="buyButton">购买</button>
+<button id="attackButton">攻击</button>
+<div id="animationContainer"></div>
+</html>
+<style>
+.animation {
+  position: absolute;
+  animation: yourAnimationName 1s forwards;  /* 替换yourAnimationName为你的动画名称 */
+}
+
+@keyframes yourAnimationName {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+  </style>
+  <script>
+  document.getElementById('buyButton').addEventListener('click', function() {
+  const animationContainer = document.getElementById('animationContainer');
+  const gifImg = document.createElement('img');
+  gifImg.src = 'gif/buyhealth.gif'; // 替换为你的gif图片路径
+  gifImg.classList.add('animation');
+  animationContainer.appendChild(gifImg);
+  setTimeout(() => {
+    animationContainer.removeChild(gifImg);
+  }, 1000); // 控制动画持续时间
+});
+
+document.getElementById('attackButton').addEventListener('click', function() {
+  const animationContainer = document.getElementById('animationContainer');
+  const pngImg = document.createElement('img');
+  pngImg.src = 'gif/attack_sowrd.gif'; // 替换为你的png图片路径
+  pngImg.classList.add('animation');
+  animationContainer.appendChild(pngImg);
+  setTimeout(() => {
+    animationContainer.removeChild(pngImg);
+  }, 1000); // 控制动画持续时间
+});
+  </script>

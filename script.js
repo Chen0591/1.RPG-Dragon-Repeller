@@ -153,10 +153,22 @@ function buyHealth() {
     health += 10;
     goldText.innerText = gold;
     healthText.innerText = health;
+    // 显示爱心动画
+    const animationContainer = document.getElementById('animationContainer');
+    const coinImg = document.createElement('img');
+    coinImg.src = 'gif/buyhealth.gif'; // 替换为你的金币动画图片路径
+    coinImg.classList.add('animation');
+    animationContainer.appendChild(coinImg);
+    setTimeout(() => {
+    animationContainer.removeChild(coinImg);
+    }, 1000); // 控制动画持续时间
+
   } else {
     text.innerText = "你没有足够的金币来购买生命值。";
   }
 }
+
+
 
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
@@ -246,6 +258,15 @@ function attack() {
     text.innerText += " 你的 " + inventory.pop() + " 毁坏了。";
     currentWeapon--;
   }
+     // 显示爱心动画
+     const animationContainer = document.getElementById('animationContainer');
+     const coinImg = document.createElement('img');
+     coinImg.src = 'gif/attack_sowrd.gif'; // 替换为你的金币动画图片路径
+     coinImg.classList.add('animation');
+     animationContainer.appendChild(coinImg);
+     setTimeout(() => {
+     animationContainer.removeChild(coinImg);
+     }, 1000); // 控制动画持续时间
 }
 
 function getMonsterAttackValue(level) {
