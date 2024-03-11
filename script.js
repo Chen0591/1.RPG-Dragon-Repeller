@@ -5,6 +5,30 @@ let currentWeapon = 0;
 let fighting;
 let monsterHealth;
 let inventory = ["木棍"];
+// 添加一个全局变量来存储当前的动画元素
+let currentAnimation;
+
+// 添加一个函数来显示动画
+function showAnimation(imgSrc, duration) {
+  // 如果有之前的动画，先移除之前的动画
+  if (currentAnimation) {
+    document.body.removeChild(currentAnimation);
+  }
+  // 创建新的动画元素并显示
+  const fullscreenAnimation = document.createElement('div');
+  fullscreenAnimation.classList.add('fullscreen-animation');
+  const gifImg = document.createElement('img');
+  gifImg.src = imgSrc;
+  gifImg.classList.add('animation');
+  fullscreenAnimation.appendChild(gifImg);
+  document.body.appendChild(fullscreenAnimation);
+  currentAnimation = fullscreenAnimation;
+  // 等待动画结束后移除当前动画
+  setTimeout(() => {
+    document.body.removeChild(fullscreenAnimation);
+    currentAnimation = null;
+  }, duration);
+}
 
 const button1 = document.querySelector('#button1');
 const button2 = document.querySelector("#button2");
@@ -129,18 +153,7 @@ function goTown() {
   addpngToButton(button1, "image/shop1.png");
   addpngToButton(button2, "image/go.png");
   addpngToButton(button3, "image/dragon1.png");
-     // 逃跑
-     const fullscreenAnimation = document.createElement('div');
-     fullscreenAnimation.classList.add('fullscreen-animation');
-  
-     const gifImg = document.createElement('img');
-     gifImg.src = 'gif/run1.gif'; // 替换为你的gif图片路径
-     gifImg.classList.add('animation');
-     fullscreenAnimation.appendChild(gifImg);
-     document.body.appendChild(fullscreenAnimation);
-     setTimeout(() => {
-       document.body.removeChild(fullscreenAnimation);
-     }, 2200); // 控制动画持续时间
+    
 }
 
 function goStore() {
@@ -219,9 +232,66 @@ function fightSlime() {
   changeBackground("image/Slimes.png");
   fighting = 0;
   goFight();
+  // 为每个按钮添加事件监听器，并在动画播放结束后调用对应的战斗方法
+  button1.addEventListener("click", function() {
+    if (monsterHealthText.innerText > 0) {
+      removeAnimation();
+      showAndContinue('gif/a_slime1.gif', 1800, combatAttack); // 添加combatAttack作为回调函数
+    }
+  });
+  button2.addEventListener("click", function() {
+    if (monsterHealthText.innerText > 0) {
+      removeAnimation();
+      showAndContinue('gif/d_slime.gif', 1800, combatDefend); // 添加combatDefend作为回调函数
+    }
+  });
+  button3.addEventListener("click", function() {
+    if (monsterHealthText.innerText > 0) {
+      removeAnimation();
+      showAndContinue('gif/run1.gif', 1800, combatRun); // 添加combatRun作为回调函数
+    }
+  });
+
+  // ... 其他不变 ...
+}
+
+// 定义战斗行为对应的函数
+function combatAttack() {
+  attack();
+  checkBattleStatus();
+}
+
+function combatDefend() {
+  dodge();
+  checkBattleStatus();
+}
+
+function combatRun() {
+  // 实现逃跑逻辑，并检查是否成功逃脱
+  checkBattleStatus();
+}
+
+// 检查战斗状态并根据结果更新游戏状态
+function checkBattleStatus() {
+  // 更新玩家和怪物的状态，并判断战斗是否结束
+  // 根据战斗结果调用 defeatMonster 或 lose 等函数
+}
+
+
   addpngToButton(button1, "image/attack.png");
   addpngToButton(button2, "image/de.png");
   addpngToButton(button3, "image/run.png");
+}
+
+function showAndContinue(imgSrc, duration, callback) {
+  showAnimation(imgSrc, duration);
+  setTimeout(callback, duration);
+}
+function removeAnimation() {
+  if (currentAnimation) {
+    document.body.removeChild(currentAnimation);
+    currentAnimation = null;
+  }
 }
 
 function fightBeast() {
@@ -231,7 +301,10 @@ function fightBeast() {
   addpngToButton(button1, "image/attack.png");
   addpngToButton(button2, "image/de.png");
   addpngToButton(button3, "image/run.png");
+
 }
+
+
 
 function fightDragon() {
   fighting = 2;
@@ -270,18 +343,6 @@ function attack() {
     text.innerText += " 你的 " + inventory.pop() + " 毁坏了。";
     currentWeapon--;
   }
-     // 攻击史莱姆
-     const fullscreenAnimation = document.createElement('div');
-      fullscreenAnimation.classList.add('fullscreen-animation');
-
-      const gifImg = document.createElement('img');
-      gifImg.src = 'gif/a_slime1.gif'; // 替换为你的gif图片路径
-      gifImg.classList.add('animation');
-      fullscreenAnimation.appendChild(gifImg);
-      document.body.appendChild(fullscreenAnimation);
-      setTimeout(() => {
-        document.body.removeChild(fullscreenAnimation);
-      }, 1600); // 控制动画持续时间
 }
 
 function getMonsterAttackValue(level) {
@@ -296,18 +357,7 @@ function isMonsterHit() {
 
 function dodge() {
   text.innerText = "你躲避了来自 " + monsters[fighting].name+"的攻击。";
-   // 防御史莱姆
-   const fullscreenAnimation = document.createElement('div');
-   fullscreenAnimation.classList.add('fullscreen-animation');
-
-   const gifImg = document.createElement('img');
-   gifImg.src = 'gif/d_slime.gif'; // 替换为你的gif图片路径
-   gifImg.classList.add('animation');
-   fullscreenAnimation.appendChild(gifImg);
-   document.body.appendChild(fullscreenAnimation);
-   setTimeout(() => {
-     document.body.removeChild(fullscreenAnimation);
-   }, 2200); // 控制动画持续时间
+   
 }
 
 function defeatMonster() {
