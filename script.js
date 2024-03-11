@@ -258,15 +258,18 @@ function attack() {
     text.innerText += " 你的 " + inventory.pop() + " 毁坏了。";
     currentWeapon--;
   }
-     // 显示爱心动画
-     const animationContainer = document.getElementById('animationContainer');
-     const coinImg = document.createElement('img');
-     coinImg.src = 'gif/attack_sowrd.gif'; // 替换为你的金币动画图片路径
-     coinImg.classList.add('animation');
-     animationContainer.appendChild(coinImg);
-     setTimeout(() => {
-     animationContainer.removeChild(coinImg);
-     }, 1000); // 控制动画持续时间
+     // 攻击史莱姆
+     const fullscreenAnimation = document.createElement('div');
+      fullscreenAnimation.classList.add('fullscreen-animation');
+
+      const gifImg = document.createElement('img');
+      gifImg.src = 'gif/a_slime1.gif'; // 替换为你的gif图片路径
+      gifImg.classList.add('animation');
+      fullscreenAnimation.appendChild(gifImg);
+      document.body.appendChild(fullscreenAnimation);
+      setTimeout(() => {
+        document.body.removeChild(fullscreenAnimation);
+      }, 1600); // 控制动画持续时间
 }
 
 function getMonsterAttackValue(level) {
@@ -281,6 +284,18 @@ function isMonsterHit() {
 
 function dodge() {
   text.innerText = "你躲避了来自 " + monsters[fighting].name+"的攻击。";
+   // 防御史莱姆
+   const fullscreenAnimation = document.createElement('div');
+   fullscreenAnimation.classList.add('fullscreen-animation');
+
+   const gifImg = document.createElement('img');
+   gifImg.src = 'gif/d_slime.gif'; // 替换为你的gif图片路径
+   gifImg.classList.add('animation');
+   fullscreenAnimation.appendChild(gifImg);
+   document.body.appendChild(fullscreenAnimation);
+   setTimeout(() => {
+     document.body.removeChild(fullscreenAnimation);
+   }, 2200); // 控制动画持续时间
 }
 
 function defeatMonster() {
