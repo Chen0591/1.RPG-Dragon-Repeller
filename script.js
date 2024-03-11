@@ -129,6 +129,18 @@ function goTown() {
   addpngToButton(button1, "image/shop1.png");
   addpngToButton(button2, "image/go.png");
   addpngToButton(button3, "image/dragon1.png");
+     // 逃跑
+     const fullscreenAnimation = document.createElement('div');
+     fullscreenAnimation.classList.add('fullscreen-animation');
+  
+     const gifImg = document.createElement('img');
+     gifImg.src = 'gif/run1.gif'; // 替换为你的gif图片路径
+     gifImg.classList.add('animation');
+     fullscreenAnimation.appendChild(gifImg);
+     document.body.appendChild(fullscreenAnimation);
+     setTimeout(() => {
+       document.body.removeChild(fullscreenAnimation);
+     }, 2200); // 控制动画持续时间
 }
 
 function goStore() {
