@@ -148,10 +148,8 @@ function update(location) {
 }
 
 function goTown() {
-  
-
   update(locations[0]);
-  changeBackground("image/Towns.png");
+  changeBackground("image/town.png");
   addpngToButton(button1, "image/shop1.png");
   addpngToButton(button2, "image/go.png");
   addpngToButton(button3, "image/dragon1.png");
@@ -159,26 +157,6 @@ function goTown() {
     
 
 function goStore() {
-  // 已经通过querySelector获取了button2元素引用
-button2.addEventListener("click", function() {
-  var modal = document.getElementById("myModal");
-  modal.style.display = "block";
-});
-
-// 关闭模态窗口的逻辑保持不变
-var closeBtn = document.getElementsByClassName("close")[0];
-closeBtn.addEventListener("click", function() {
-  var modal = document.getElementById("myModal");
-  modal.style.display = "none";
-});
-// 点击模态框之外的地方关闭
-window.onclick = function(event) {
-  var modal = document.getElementById("myModal");
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-};
-
   update(locations[1]);
   changeBackground("image/shop.png");
   addpngToButton(button1, "image/life.png");
