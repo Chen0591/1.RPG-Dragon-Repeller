@@ -274,7 +274,7 @@ function goFight() {
     showAnimation( 'gif/run2.gif', 1500);
     goTown();
   }else if(monsters[fighting].name=="巨龙"){
-    showAnimation( 'gif/a_slime1.gif', 1800);
+    showAnimation( 'gif/run3.gif', 1200);
     goTown();
   }
   else{goTown();}
@@ -325,7 +325,7 @@ function attack() {
       currentWeapon--;
     }}
     else if(monsters[fighting].name=="巨龙"){
-      showAnimation( 'gif/a_slime1.gif', 1800);//替换成相应的动画
+      showAnimation( 'gif/a_dragon.gif', 1800);//替换成相应的动画
       text.innerText = "这只 " + monsters[fighting].name + " 在攻击.";
       text.innerText += " 你利用 " + weapons[currentWeapon].name + "在战斗.";
       health -= getMonsterAttackValue(monsters[fighting].level);
@@ -367,7 +367,7 @@ function dodge() {
     text.innerText = "你躲避了来自 " + monsters[fighting].name+"的攻击。";
   }
   else if(monsters[fighting].name=="巨龙"){
-    showAnimation( 'gif/run1.gif', 1800); //替换成相应的动画
+    showAnimation( 'gif/d_dragon.gif', 1800); //替换成相应的动画
     text.innerText = "你躲避了来自 " + monsters[fighting].name+"的攻击。";
   }   
 }
