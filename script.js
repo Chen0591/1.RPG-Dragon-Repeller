@@ -43,8 +43,8 @@ const monsterHealthText = document.querySelector("#monsterHealth");
 const weapons = [
   { name: '木棍', power: 5 },
   { name: '匕首', power: 30 },
-  { name: '羊角锤', power: 50 },
-  { name: '大剑', power: 100 }
+  { name: '大锤', power: 50 },
+  { name: '巨剑', power: 100 }
 ];
 const monsters = [
   {
@@ -148,6 +148,7 @@ function update(location) {
 }
 
 function goTown() {
+  
 
   update(locations[0]);
   changeBackground("image/Towns.png");
@@ -157,14 +158,37 @@ function goTown() {
 }
     
 
-
 function goStore() {
+  // 已经通过querySelector获取了button2元素引用
+button2.addEventListener("click", function() {
+  var modal = document.getElementById("myModal");
+  modal.style.display = "block";
+});
+
+// 关闭模态窗口的逻辑保持不变
+var closeBtn = document.getElementsByClassName("close")[0];
+closeBtn.addEventListener("click", function() {
+  var modal = document.getElementById("myModal");
+  modal.style.display = "none";
+});
+// 点击模态框之外的地方关闭
+window.onclick = function(event) {
+  var modal = document.getElementById("myModal");
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
   update(locations[1]);
   changeBackground("image/shop.png");
   addpngToButton(button1, "image/life.png");
   addpngToButton(button2, "image/weapon.png");
   addpngToButton(button3, "image/amsterdam.png");
+
 }
+
+
+
 function goCave() {
   update(locations[2]);
   changeBackground("image/Cave.png");
@@ -434,4 +458,5 @@ function pick(guess) {
     }
   }
 }
+
 

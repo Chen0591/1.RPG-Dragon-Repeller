@@ -106,7 +106,7 @@ button {
 }
 
 .modal-content {
-  background-color: #fefefe;
+  background-color:rgba(255,255,255,0.1);
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
@@ -125,4 +125,28 @@ button {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+#myModal {
+  display: none;
+  position: static; /* 由于body设置了relative，这里不需要absolute定位也能居中 */
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+/* 当模态窗口显示时，通过JavaScript将display改为block */
+#myModal.show {
+  display: flex;
+  background-color: rgba(255,255,255,0.1);
+}
+
+.modal-content {
+  background-color: rgba(255,255,255,0.5);
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
