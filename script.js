@@ -148,13 +148,15 @@ function update(location) {
 }
 
 function goTown() {
+
   update(locations[0]);
   changeBackground("image/Towns.png");
   addpngToButton(button1, "image/shop1.png");
   addpngToButton(button2, "image/go.png");
   addpngToButton(button3, "image/dragon1.png");
-    
 }
+    
+
 
 function goStore() {
   update(locations[1]);
@@ -232,66 +234,9 @@ function fightSlime() {
   changeBackground("image/Slimes.png");
   fighting = 0;
   goFight();
-  // 为每个按钮添加事件监听器，并在动画播放结束后调用对应的战斗方法
-  button1.addEventListener("click", function() {
-    if (monsterHealthText.innerText > 0) {
-      removeAnimation();
-      showAndContinue('gif/a_slime1.gif', 1800, combatAttack); // 添加combatAttack作为回调函数
-    }
-  });
-  button2.addEventListener("click", function() {
-    if (monsterHealthText.innerText > 0) {
-      removeAnimation();
-      showAndContinue('gif/d_slime.gif', 1800, combatDefend); // 添加combatDefend作为回调函数
-    }
-  });
-  button3.addEventListener("click", function() {
-    if (monsterHealthText.innerText > 0) {
-      removeAnimation();
-      showAndContinue('gif/run1.gif', 1800, combatRun); // 添加combatRun作为回调函数
-    }
-  });
-
-  // ... 其他不变 ...
-}
-
-// 定义战斗行为对应的函数
-function combatAttack() {
-  attack();
-  checkBattleStatus();
-}
-
-function combatDefend() {
-  dodge();
-  checkBattleStatus();
-}
-
-function combatRun() {
-  // 实现逃跑逻辑，并检查是否成功逃脱
-  checkBattleStatus();
-}
-
-// 检查战斗状态并根据结果更新游戏状态
-function checkBattleStatus() {
-  // 更新玩家和怪物的状态，并判断战斗是否结束
-  // 根据战斗结果调用 defeatMonster 或 lose 等函数
-}
-
-
   addpngToButton(button1, "image/attack.png");
   addpngToButton(button2, "image/de.png");
   addpngToButton(button3, "image/run.png");
-}
-
-function showAndContinue(imgSrc, duration, callback) {
-  showAnimation(imgSrc, duration);
-  setTimeout(callback, duration);
-}
-function removeAnimation() {
-  if (currentAnimation) {
-    document.body.removeChild(currentAnimation);
-    currentAnimation = null;
-  }
 }
 
 function fightBeast() {
@@ -321,9 +266,24 @@ function goFight() {
   monsterStats.style.display = "block";
   monsterName.innerText = monsters[fighting].name;
   monsterHealthText.innerText = monsterHealth;
+  button3.onclick=function(){
+  if(monsters[fighting].name=="史莱姆"){
+    showAnimation( 'gif/run1.gif', 1800); //替换成相应的动画
+    goTown();
+  }else if(monsters[fighting].name=="獠牙兽"){
+    showAnimation( 'gif/buyhealth.gif', 1800);
+    goTown();
+  }else if(monsters[fighting].name=="巨龙"){
+    showAnimation( 'gif/a_slime1.gif', 1800);
+    goTown();
+  }
+  else{goTown();}
+  }
 }
 
 function attack() {
+  if(monsters[fighting].name=="史莱姆"){
+  showAnimation( 'gif/a_slime1.gif', 1800);
   text.innerText = "这只 " + monsters[fighting].name + " 在攻击.";
   text.innerText += " 你利用 " + weapons[currentWeapon].name + "在战斗.";
   health -= getMonsterAttackValue(monsters[fighting].level);
@@ -342,8 +302,50 @@ function attack() {
   if (Math.random() <= .1 && inventory.length !== 1) {
     text.innerText += " 你的 " + inventory.pop() + " 毁坏了。";
     currentWeapon--;
-  }
-}
+  }}
+  else if(monsters[fighting].name=="獠牙兽"){
+    showAnimation( 'gif/a_slime1.gif', 1800);//替换成相应的动画
+    text.innerText = "这只 " + monsters[fighting].name + " 在攻击.";
+    text.innerText += " 你利用 " + weapons[currentWeapon].name + "在战斗.";
+    health -= getMonsterAttackValue(monsters[fighting].level);
+    if (isMonsterHit()) {
+      monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;    
+    } else {
+      text.innerText += " 没有命中.";
+    }
+    healthText.innerText = health;
+    monsterHealthText.innerText = monsterHealth;
+    if (health <= 0) {
+      lose();
+    } else if (monsterHealth <= 0) {
+      fighting === 2 ? winGame() : defeatMonster();
+    }
+    if (Math.random() <= .1 && inventory.length !== 1) {
+      text.innerText += " 你的 " + inventory.pop() + " 毁坏了。";
+      currentWeapon--;
+    }}
+    else if(monsters[fighting].name=="巨龙"){
+      showAnimation( 'gif/a_slime1.gif', 1800);//替换成相应的动画
+      text.innerText = "这只 " + monsters[fighting].name + " 在攻击.";
+      text.innerText += " 你利用 " + weapons[currentWeapon].name + "在战斗.";
+      health -= getMonsterAttackValue(monsters[fighting].level);
+      if (isMonsterHit()) {
+        monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;    
+      } else {
+        text.innerText += " 没有命中.";
+      }
+      healthText.innerText = health;
+      monsterHealthText.innerText = monsterHealth;
+      if (health <= 0) {
+        lose();
+      } else if (monsterHealth <= 0) {
+        fighting === 2 ? winGame() : defeatMonster();
+      }
+      if (Math.random() <= .1 && inventory.length !== 1) {
+        text.innerText += " 你的 " + inventory.pop() + " 毁坏了。";
+        currentWeapon--;
+      }}
+      }
 
 function getMonsterAttackValue(level) {
   const hit = (level * 5) - (Math.floor(Math.random() * xp));
@@ -356,8 +358,18 @@ function isMonsterHit() {
 }
 
 function dodge() {
-  text.innerText = "你躲避了来自 " + monsters[fighting].name+"的攻击。";
-   
+  if(monsters[fighting].name=="史莱姆"){
+    showAnimation( 'gif/d_slime.gif', 1800); //替换成相应的动画
+    text.innerText = "你躲避了来自 " + monsters[fighting].name+"的攻击。";
+  }
+  else if(monsters[fighting].name=="獠牙兽"){
+    showAnimation( 'gif/buyhealth.gif', 1800); //替换成相应的动画
+    text.innerText = "你躲避了来自 " + monsters[fighting].name+"的攻击。";
+  }
+  else if(monsters[fighting].name=="巨龙"){
+    showAnimation( 'gif/run1.gif', 1800); //替换成相应的动画
+    text.innerText = "你躲避了来自 " + monsters[fighting].name+"的攻击。";
+  }   
 }
 
 function defeatMonster() {
