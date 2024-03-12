@@ -1,72 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <style>
-    .fullscreen-animation {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      z-index: 9999; /* 确保在最上层显示 */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .fullscreen-animation img {
-      max-width: 80%; /* 设置图片的最大宽度 */
-      height: auto;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- 引入外部样式表 -->
+    <title>模态窗口示例</title>
 </head>
 <body>
-  <button id="buyButton">购买</button>
-  <button id="attackButton">攻击</button>
-  <button id="defense">防御</button>
 
-  <script>
-    document.getElementById('buyButton').addEventListener('click', function() {
-      const fullscreenAnimation = document.createElement('div');
-      fullscreenAnimation.classList.add('fullscreen-animation');
+<button id="openModalBtn">点击打开模态窗口</button>
 
-      const gifImg = document.createElement('img');
-      gifImg.src = 'gif/a_slime1.gif'; // 替换为你的gif图片路径
-      gifImg.classList.add('animation');
-      fullscreenAnimation.appendChild(gifImg);
-      document.body.appendChild(fullscreenAnimation);
-      setTimeout(() => {
-        document.body.removeChild(fullscreenAnimation);
-      }, 1600); // 控制动画持续时间
-    });
+<!-- 模态窗口内容 -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>这里是模态窗口的内容。</p>
+  </div>
+</div>
 
-    document.getElementById('attackButton').addEventListener('click', function() {
-      const fullscreenAnimation = document.createElement('div');
-      fullscreenAnimation.classList.add('fullscreen-animation');
+<script src="scripts.js"></script> <!-- 引入外部脚本 -->
 
-      const pngImg = document.createElement('img');
-      pngImg.src = 'gif/attack.gif'; // 替换为你的png图片路径
-      pngImg.classList.add('animation');
-      fullscreenAnimation.appendChild(pngImg);
-      document.body.appendChild(fullscreenAnimation);
-      setTimeout(() => {
-        document.body.removeChild(fullscreenAnimation);
-      }, 1000); // 控制动画持续时间
-    });
-
-    document.getElementById('defense').addEventListener('click', function() {
-      const fullscreenAnimation = document.createElement('div');
-      fullscreenAnimation.classList.add('fullscreen-animation');
-
-      const pngImg = document.createElement('img');
-      pngImg.src = 'gif/defense.gif'; // 替换为你的png图片路径
-      pngImg.classList.add('animation');
-      fullscreenAnimation.appendChild(pngImg);
-      document.body.appendChild(fullscreenAnimation);
-      setTimeout(() => {
-        document.body.removeChild(fullscreenAnimation);
-      }, 1000); // 控制动画持续时间
-    });
-  </script>
 </body>
 </html>
+<style>
+  /* 隐藏模态窗口默认 */
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  padding-top: 100px; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
+<script>
+  document.getElementById("openModalBtn").addEventListener("click", function() {
+  var modal = document.getElementById("myModal");
+  modal.style.display = "block";
+});
+
+// 关闭模态窗口的逻辑
+var closeBtn = document.getElementsByClassName("close")[0];
+closeBtn.addEventListener("click", function() {
+  var modal = document.getElementById("myModal");
+  modal.style.display = "none";
+});
+
+// 点击模态框之外的地方关闭
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+</script>
