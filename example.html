@@ -1,48 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css"> <!-- 引入外部样式表 -->
-    <title>模态窗口示例</title>
-</head>
-<body>
-
-<button id="openModalBtn">点击打开模态窗口</button>
-
-<!-- 模态窗口内容 -->
 <div id="myModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <p>以下是本店出售的武器：</p>
-    <ul>
-      <li>木棍 - 威力: 5</li>
-      <li>匕首 - 威力: 30</li>
-      <li>大锤 - 威力: 50</li>
-      <li>巨剑 - 威力: 100</li>
-    </ul>
+    <p>你的武器库里有: <span id="inventoryContent"></span></p>
+    <button id="confirmPurchase">确认购买</button>
+    <button id="cancelPurchase">取消购买</button>
   </div>
 </div>
-</body>
-</html>
-
 <script>
-  document.getElementById("openModalBtn").addEventListener("click", function() {
-  var modal = document.getElementById("myModal");
-  modal.style.display = "block";
-});
-
-// 关闭模态窗口的逻辑
-var closeBtn = document.getElementsByClassName("close")[0];
-closeBtn.addEventListener("click", function() {
-  var modal = document.getElementById("myModal");
-  modal.style.display = "none";
-});
-
-// 点击模态框之外的地方关闭
-window.onclick = function(event) {
-  if (event.target == modal) {
+let inventory = ["木棍"];
+document.getElementById("inventoryContent").innerHTML = inventory.join(', '); // 更新inventory的内容
+var confirmPurchase = document.getElementById("confirmPurchase");
+  confirmPurchase.addEventListener("click", function() {
+    var modal = document.getElementById("myModal");
     modal.style.display = "none";
-  }
-};
+    // 这里编写购买成功的逻辑，例如扣除金币、增加装备等
+    // 调用购买武器的函数
+   
+    buyWeapon();
+  });
 </script>

@@ -158,12 +158,57 @@ function goTown() {
 
 function goStore() {
   update(locations[1]);
+  
+  
+  if (button2.innerText === "购买武器 (30 金币)") {
+    button2.onclick = function() {
+      var modal = document.getElementById("myModal");
+      modal.style.display = "block";
+      //增加显示库存
+      var inventoryContent=document.getElementById("iventory");
+      inventoryContent.innerHTML=inventory.join(',')
+    };
+  }
   changeBackground("image/shop.png");
   addpngToButton(button1, "image/life.png");
   addpngToButton(button2, "image/weapon.png");
   addpngToButton(button3, "image/amsterdam.png");
-
 }
+
+
+// 模态框相关逻辑
+//购买前显示库存
+
+
+var confirmPurchase = document.getElementById("confirmPurchase");
+  confirmPurchase.addEventListener("click", function() {
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+    // 这里编写购买成功的逻辑，例如扣除金币、增加装备等
+    // 调用购买武器的函数
+   
+    buyWeapon();});
+var cancelPurchase = document.getElementById("cancelPurchase");
+cancelPurchase.addEventListener("click", function() {
+  var modal = document.getElementById("myModal");
+  modal.style.display = "none";
+});
+
+// 关闭模态窗口的逻辑
+var closeBtn = document.getElementsByClassName("close")[0];
+closeBtn.addEventListener("click", function() {
+  var modal = document.getElementById("myModal");
+  modal.style.display = "none";
+});
+
+// 点击模态框之外的地方关闭
+window.onclick = function(event) {
+  var modal = document.getElementById("myModal");
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
 
 
 
@@ -198,8 +243,8 @@ function buyHealth() {
 }
 
 
-
 function buyWeapon() {
+  
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
       gold -= 30;

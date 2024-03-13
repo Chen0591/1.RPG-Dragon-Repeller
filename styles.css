@@ -150,3 +150,11 @@ button {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   text-align: center;
 }
+
+#purchaseText{
+  position: static; 
+  display: contents;
+  background-color: rgba(222, 230, 10, 0.4);
+  padding: 1rem;
+  border-radius: 4px;
+}
