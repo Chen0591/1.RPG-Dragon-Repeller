@@ -169,7 +169,7 @@ function goStore() {
       inventoryContent.innerHTML=inventory.join(',')
     };
   }
-  changeBackground("image/shop.png");
+  changeBackground("image/shop1.jpg");
   addpngToButton(button1, "image/life.png");
   addpngToButton(button2, "image/weapon.png");
   addpngToButton(button3, "image/amsterdam.png");
@@ -214,7 +214,7 @@ window.onclick = function(event) {
 
 function goCave() {
   update(locations[2]);
-  changeBackground("image/Cave.png");
+  changeBackground("image/cave0.jpg");
   addpngToButton(button1, "image/slime_fill.png");
   addpngToButton(button2, "image/野兽.png");
   addpngToButton(button3, "image/amsterdam.png");
@@ -278,7 +278,7 @@ function sellWeapon() {
 
 
 function fightSlime() {
-  changeBackground("image/Slimes.png");
+  changeBackground("image/史莱姆1.png");
   fighting = 0;
   goFight();
   addpngToButton(button1, "image/attack.png");
@@ -300,7 +300,7 @@ function fightBeast() {
 
 function fightDragon() {
   fighting = 2;
-  changeBackground("image/Dragon.png");
+  changeBackground("image/dragon_cave.jpg");
   goFight();
   addpngToButton(button1, "image/attack.png");
   addpngToButton(button2, "image/de.png");
